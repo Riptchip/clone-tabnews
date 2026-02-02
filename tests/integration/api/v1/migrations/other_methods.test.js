@@ -1,4 +1,9 @@
 import database from "infra/database.js";
+import orchestrator from "tests/orchestrator.js";
+
+beforeAll(async () => {
+  await orchestrator.waitForAllServices()
+})
 
 test("Methods different than GET and POST should return 405 and don't leave any open connections to DB", async () => {
   const test_methods = ["PUT", "DELETE", "OPTIONS", "PATCH"];
